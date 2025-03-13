@@ -1,0 +1,9 @@
+{
+	"name": "project-adf-batch20",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bcbd306d-a7c7-43bf-801b-0edc2d34bf03",
+		"tenantId": "6a0064c5-a32f-4e79-9b0f-4897308275cf"
+	}
+}
