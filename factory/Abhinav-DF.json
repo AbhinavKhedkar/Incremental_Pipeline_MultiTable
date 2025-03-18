@@ -1,0 +1,9 @@
+{
+	"name": "Abhinav-DF",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0ad8cbce-c51f-46a5-ba92-377a7734e7e2",
+		"tenantId": "dbb53e52-7aad-4581-9b35-3c72849743e7"
+	}
+}
