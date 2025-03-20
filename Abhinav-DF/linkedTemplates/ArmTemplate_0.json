@@ -11,13 +11,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
 		},
-		"PostgreSql1_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'PostgreSql1'"
-		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://projectadlsbatch20.dfs.core.windows.net/"
+			"defaultValue": "https://abhinavadls.dfs.core.windows.net/"
+		},
+		"AzureKeyVault_LS_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://Abhinav-AKV.vault.azure.net/"
+		},
+		"SelfHoistedIntegrationRuntime_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/6c00026f-99cb-4c50-bdcb-43811c2c16c1/resourcegroups/Project-RG/providers/Microsoft.DataFactory/factories/Project20-ADF/integrationruntimes/SelfHoistedIntegrationRuntime"
 		},
 		"PostgreSql1_properties_typeProperties_server": {
 			"type": "string",
@@ -54,12 +58,30 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SelfHostedIntegrationRuntiome')]",
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault_LS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault_LS_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SelfHoistedIntegrationRuntime')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"type": "SelfHosted",
-				"typeProperties": {}
+				"typeProperties": {
+					"linkedInfo": {
+						"resourceId": "[parameters('SelfHoistedIntegrationRuntime_properties_typeProperties_linkedInfo_resourceId')]",
+						"authorizationType": "Rbac"
+					}
+				}
 			},
 			"dependsOn": []
 		},
@@ -119,19 +141,24 @@
 					"database": "[parameters('PostgreSql1_properties_typeProperties_database')]",
 					"username": "[parameters('PostgreSql1_properties_typeProperties_username')]",
 					"password": {
-						"type": "SecureString",
-						"value": "[parameters('PostgreSql1_password')]"
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_LS",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "PostgresPassword"
 					},
 					"sslMode": 2,
 					"authenticationType": "Basic"
 				},
 				"connectVia": {
-					"referenceName": "SelfHostedIntegrationRuntiome",
+					"referenceName": "SelfHoistedIntegrationRuntime",
 					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/SelfHostedIntegrationRuntiome')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/SelfHoistedIntegrationRuntime')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_LS')]"
 			]
 		},
 		{

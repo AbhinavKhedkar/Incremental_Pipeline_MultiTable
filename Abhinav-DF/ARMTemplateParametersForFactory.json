@@ -8,11 +8,11 @@
 		"AzureDataLakeStorage1_accountKey": {
 			"value": ""
 		},
-		"PostgreSql1_password": {
-			"value": ""
-		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"value": "https://projectadlsbatch20.dfs.core.windows.net/"
+			"value": "https://abhinavadls.dfs.core.windows.net/"
+		},
+		"AzureKeyVault_LS_properties_typeProperties_baseUrl": {
+			"value": "https://Abhinav-AKV.vault.azure.net/"
 		},
 		"PostgreSql1_properties_typeProperties_server": {
 			"value": "localhost"
@@ -22,6 +22,9 @@
 		},
 		"PostgreSql1_properties_typeProperties_username": {
 			"value": "postgres"
+		},
+		"SelfHoistedIntegrationRuntime_properties_typeProperties_linkedInfo_resourceId": {
+			"value": "/subscriptions/6c00026f-99cb-4c50-bdcb-43811c2c16c1/resourcegroups/Project-RG/providers/Microsoft.DataFactory/factories/Project20-ADF/integrationruntimes/SelfHoistedIntegrationRuntime"
 		}
 	}
 }
