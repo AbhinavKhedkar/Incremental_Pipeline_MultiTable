@@ -1,6 +1,5 @@
 {
 	"name": "PostgreSql1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "PostgreSqlV2",
@@ -9,9 +8,21 @@
 			"port": 5432,
 			"database": "Project-ADE-18-DB",
 			"username": "postgres",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault_LS",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "PostgresPassword"
+			},
 			"sslMode": 2,
-			"authenticationType": "Basic",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmODc4MjFlNC00MWRiLTQwYjctODJhOC1jZDc1M2MyYmUyMWYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"authenticationType": "Basic"
+		},
+		"connectVia": {
+			"referenceName": "SelfHoistedIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
