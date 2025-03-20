@@ -1,0 +1,12 @@
+{
+	"name": "SelfHoistedIntegrationRuntime",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"linkedInfo": {
+				"resourceId": "/subscriptions/6c00026f-99cb-4c50-bdcb-43811c2c16c1/resourcegroups/Project-RG/providers/Microsoft.DataFactory/factories/Project20-ADF/integrationruntimes/SelfHoistedIntegrationRuntime",
+				"authorizationType": "Rbac"
+			}
+		}
+	}
+}
